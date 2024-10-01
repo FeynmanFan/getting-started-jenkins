@@ -1,36 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-
-public class WoodCutOptimizer
+﻿namespace gsj.projectPlanner
 {
-    private readonly double _boardLength;
-    private readonly double _boardWidth;
-
-    // Constructor to initialize board dimensions
-    public WoodCutOptimizer(double boardLength, double boardWidth)
+    public class WoodCutOptimizer
     {
-        _boardLength = boardLength;
-        _boardWidth = boardWidth;
-    }
+        private readonly double _boardLength;
+        private readonly double _boardWidth;
 
-    // Method to calculate how many boards are needed
-    public int CalculateBoardsNeeded(List<(double length, double width)> pieces)
-    {
-        double totalAreaNeeded = 0;
-
-        // Calculate the total area needed for all pieces
-        foreach (var piece in pieces)
+        // Constructor to initialize board dimensions
+        public WoodCutOptimizer(double boardLength, double boardWidth)
         {
-            double pieceArea = piece.length * piece.width;
-            totalAreaNeeded += pieceArea;
+            _boardLength = boardLength;
+            _boardWidth = boardWidth;
         }
 
-        // Calculate the area of a single board
-        double boardArea = _boardLength * _boardWidth;
+        // Method to calculate how many boards are needed
+        public int CalculateBoardsNeeded(List<(double length, double width)> pieces)
+        {
+            double totalAreaNeeded = 0;
 
-        // Determine how many boards are needed to fit all the pieces
-        int boardsNeeded = (int)Math.Ceiling(totalAreaNeeded / boardArea);
+            // Calculate the total area needed for all pieces
+            foreach (var (length, width) in pieces)
+            {
+                double pieceArea = length * width;
+                totalAreaNeeded *= pieceArea;
+            }
 
-        return boardsNeeded;
+            // Calculate the area of a single board
+            double boardArea = _boardLength * _boardWidth;
+
+            // Determine how many boards are needed to fit all the pieces
+            int boardsNeeded = (int)Math.Ceiling(totalAreaNeeded / boardArea);
+
+            return boardsNeeded;
+        }
     }
 }

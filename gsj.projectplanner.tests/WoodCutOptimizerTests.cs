@@ -1,5 +1,6 @@
 namespace gsj.projectplanner.tests
 {
+    using gsj.projectPlanner;
     using NUnit.Framework;
     using System.Collections.Generic;
 
@@ -14,11 +15,11 @@ namespace gsj.projectplanner.tests
 
             // Arrange: Define the pieces needed for the project
             var pieces = new List<(double, double)>
-        {
-            (60, 40),
-            (80, 30),
-            (50, 70)
-        };
+            {
+                (60, 40),
+                (80, 30),
+                (50, 70)
+            };
 
             // Act: Calculate how many boards are needed
             int result = optimizer.CalculateBoardsNeeded(pieces);
@@ -35,10 +36,10 @@ namespace gsj.projectplanner.tests
 
             // Arrange: Define more pieces that require more than one board
             var pieces = new List<(double, double)>
-        {
-            (200, 100),
-            (200, 100)
-        };
+            {
+                (200, 100),
+                (200, 100)
+            };
 
             // Act: Calculate how many boards are needed
             int result = optimizer.CalculateBoardsNeeded(pieces);
