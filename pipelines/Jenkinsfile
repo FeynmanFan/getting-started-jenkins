@@ -2,15 +2,27 @@ pipeline {
     agent any
 
     stages{
-        stage('Hello') {
+        stage('SCM') {
             steps{
-                echo 'Hello, World!'
+                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/FeynmanFan/getting-started-jenkins']])
             }
         }
-        stage('Goodbye') {
+        stage('Compile') {
             steps{
-                echo 'Goodbye, World!'
+                dotnetBuild project: 'gsj.sln'
             }
+        }
+        stage('Test') {
+            steps{
+                bat 'dotnet test gsj.sln'
+            }
+        }
+        stage('Archive')
+        {
+            echo 'Archive the results of the build'
+        }
+        stage('Cleanup'){
+            cleanWs()
         }
     }
 }
