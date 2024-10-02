@@ -17,12 +17,15 @@ pipeline {
                 bat 'dotnet test gsj.sln'
             }
         }
-        stage('Archive')
-        {
-            echo 'Archive the results of the build'
+        stage('Archive'){
+            steps{
+                echo 'Archive the build results'
+            }
         }
         stage('Cleanup'){
-            cleanWs()
+            steps{
+                cleanWs()
+            }
         }
     }
 }
