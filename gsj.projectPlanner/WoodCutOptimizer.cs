@@ -21,7 +21,7 @@
             foreach (var (length, width) in pieces)
             {
                 double pieceArea = length * width;
-                totalAreaNeeded *= pieceArea;
+                totalAreaNeeded += pieceArea;
             }
 
             // Calculate the area of a single board
